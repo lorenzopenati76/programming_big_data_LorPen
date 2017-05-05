@@ -16,7 +16,9 @@ def get_commits(data):
             # the author with spaces at end removed.
             commit = {'revision': details[0].strip(),
                 'author': details[1].strip(),
-                'date': details[2].strip(),
+                'date': details[2].strip().split(' ')[0],
+                'time': details[2].strip().split(' ')[1],
+                'day': details[2].strip().split(' ')[3][1:4],                
                 'number_of_lines': details[3].strip().split(' ')[1]
             }
             # add details to the list of commits.
@@ -28,13 +30,21 @@ def get_commits(data):
 
 if __name__ == '__main__':
     # open the file - and read all of the lines.
-    changes_file = 'changes_python.log'
+    changes_file = "Data.txt"
     data = read_file(changes_file)
     commits = get_commits(data)
 
     # print the number of lines read
     print(len(data))
-    #print(commits)
-    print(commits[0])
+    print len(commits)
+    #print(commits[0])
     print(commits[1]['author'])
-    print(len(commits))
+    print(commits[1]['date'])
+    print(commits[1]['time'])
+    i=0
+    while i < len(commits):
+        print(commits[i]['day'])
+        i = i+1
+        print str(i)
+
+    #print(len(commits))
